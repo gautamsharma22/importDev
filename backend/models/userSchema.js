@@ -42,7 +42,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function (next) {
   try {
-    const salt = await bcrypt.genSalt(process.env.SALT_ROUNDS);
+    const saltRounds = parseInt(process.env.SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(this.password, salt);
     console.log(hashedPassword);
     this.password = hashedPassword;

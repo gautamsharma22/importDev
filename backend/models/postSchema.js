@@ -12,8 +12,11 @@ const postSchema = new mongoose.Schema({
   },
   lastModified: {
     type: Date,
-    default: () => new Date(),
+  },
+  content: {
+    type: String,
     required: true,
+    trim: true,
   },
   techStack: [String],
 });
