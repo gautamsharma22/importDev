@@ -26,7 +26,17 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  freindsOf: [
+  shortTagline: {
+    type: String,
+    trim: true,
+  },
+  followedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  following: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -45,7 +55,6 @@ userSchema.pre("save", async function (next) {
     const saltRounds = parseInt(process.env.SALT_ROUNDS);
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(this.password, salt);
-    console.log(hashedPassword);
     this.password = hashedPassword;
     next();
   } catch (error) {

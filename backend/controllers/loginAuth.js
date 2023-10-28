@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const User = require("../models/userSchema");
 const loginAuth = async (req, res) => {
   const { email, password } = req.body;
@@ -15,10 +16,13 @@ const loginAuth = async (req, res) => {
       return res.status(400).json({ error: err.message });
     }
     if (response) {
-      const fullName = firstName + lastName;
+      const fullName = firstName + " " + lastName;
+      const { _id } = existingUser;
+      const token = jwt.sign({ fullName, email, _id }, process.env.SECRET_KEY);
       return res.status(200).json({
         message: "Logged in succesfully",
         fullName: fullName,
+        token: token,
       });
     } else {
       return res.status(401).json({

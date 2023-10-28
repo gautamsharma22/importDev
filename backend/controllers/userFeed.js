@@ -1,5 +1,8 @@
+const mongoose = require("mongoose");
 const Post = require("../models/postSchema");
-const viewAllPosts = async (req, res) => {
+const userFeed = async (req, res) => {
+  const { userId } = req.body;
+  const userObId = new mongoose.Types.ObjectId(userId);
   try {
     const posts = await Post.aggregate([
       {
@@ -14,6 +17,13 @@ const viewAllPosts = async (req, res) => {
         $unwind: "$user",
       },
       {
+        $addFields: {
+          isLiked: {
+            $in: [userObId, "$likedBy"],
+          },
+        },
+      },
+      {
         $project: {
           _id: 1,
           content: 1,
@@ -21,14 +31,14 @@ const viewAllPosts = async (req, res) => {
           authorName: {
             $concat: ["$user.firstName", " ", "$user.lastName"],
           },
+          isLiked: 1,
         },
       },
     ]);
-    console.log("All Post:", posts);
     return res.status(200).json({ posts });
   } catch (err) {
     console.error("Error fetching Post:", err);
     return res.status(400).json({ error: err.message });
   }
 };
-module.exports = viewAllPosts;
+module.exports = userFeed;

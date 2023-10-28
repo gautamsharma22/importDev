@@ -13,6 +13,16 @@ const postSchema = new mongoose.Schema({
   lastModified: {
     type: Date,
   },
+  isPublic: {
+    type: Boolean,
+    default: false,
+  },
+  likedBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   content: {
     type: String,
     required: true,

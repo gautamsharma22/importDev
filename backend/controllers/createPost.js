@@ -1,15 +1,16 @@
 const Post = require("../models/postSchema");
 const User = require("../models/userSchema");
 const createPost = async (req, res) => {
-  const { postedBy, postedAt, content, techStack, userId} = req.body;
-  if (!postedBy || !postedAt || !content || !techStack || !userId) {
+  const { postedBy, content, techStack, userId} = req.body;
+  if (!postedBy || !content || !techStack || !userId) {
     return res
       .status(400)
       .json({ error: "Provide all the fields required for Post." });
   }
+  const postedAt = new Date();
   const post1 = new Post({
-    postedBy,
     postedAt,
+    postedBy,
     content,
     techStack,
   });

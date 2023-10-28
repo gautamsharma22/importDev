@@ -1,9 +1,13 @@
 const express = require("express");
 const createPost = require("../controllers/createPost");
-const viewAllPosts = require("../controllers/viewAllPosts");
+const userFeed = require("../controllers/userFeed");
 const viewUserPosts = require("../controllers/viewUserPosts");
+const { likePost, unlikePost } = require("../controllers/likePost");
+const jwtAuth = require("../middlewares/jwtAuth");
 const router = express.Router();
-router.get("/", viewAllPosts);
-router.get("/:userId", viewUserPosts);
-router.post("/create", createPost);
+router.get("/", jwtAuth, userFeed);
+router.get("/:userId", jwtAuth, viewUserPosts);
+router.post("/create", jwtAuth, createPost);
+router.post("/like", jwtAuth, likePost);
+router.post("/unlike", jwtAuth, unlikePost);
 module.exports = router;
