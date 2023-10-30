@@ -10,26 +10,14 @@ const Home = () => {
       container
       component="main"
       sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         height: "100vh",
         background: "linear-gradient(to right, #9796f0, #fbc7d4)",
       }}
     >
       <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={4}
-        sx={{
-          display: { xs: "none", sm: "flex" },
-          flexDirection: "column",
-          alignItems: "center",
-          justifyItems: "center",
-          alignContent: "center",
-          justifyContent: "center",
-        }}
-      >
-      </Grid>
       <Routes>
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />

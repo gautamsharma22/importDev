@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Fade from "@mui/material/Fade";
 import CustomSnackBar from "./Alert";
@@ -29,18 +28,17 @@ const Login = () => {
   };
   return (
     <>
-      <Grid
+      <Box
         sx={{
           display: "flex",
+          width:{xs:'100vw' ,md:'50vw'},
+          height:{xs:'100vh' ,md:'70vh'},
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: "rgba( 255, 255, 255, 0.3 )",
           backdropFilter: "blur( 4px )",
+          borderRadius:"1rem"
         }}
-        item
-        xs={12}
-        sm={8}
-        md={4}
         component={Paper}
         elevation={6}
         square
@@ -97,7 +95,7 @@ const Login = () => {
             </Button>
           </Box>
         </Box>
-      </Grid>
+      </Box>
       {open && (
         <CustomSnackBar
           {...state}
