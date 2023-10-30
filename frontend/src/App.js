@@ -1,6 +1,7 @@
 import Home from "./Components/Home";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Feed from "./Components/Feed";
 function App() {
   const defaultTheme = createTheme({
     palette: {
@@ -19,7 +20,10 @@ function App() {
     <>
       <Router>
         <ThemeProvider theme={defaultTheme}>
-          <Home />
+          <Routes>
+            <Route path="*" element={<Home />} />
+            <Route path="/Feed" element={<Feed />} />
+          </Routes>
         </ThemeProvider>
       </Router>
     </>
