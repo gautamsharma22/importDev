@@ -26,6 +26,8 @@ function Feed(props) {
     const date = new Date(post.postedAt.$date).toLocaleString();
     return (
       <ProjectCard
+        key={post._id}
+        post_id={post._id}
         body={post.content}
         fullName={post.authorName}
         tagline={post.tagline}

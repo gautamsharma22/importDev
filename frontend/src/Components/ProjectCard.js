@@ -29,13 +29,16 @@ const Comment = styled((props) => {
 
 const ProjectCard = (props) => {
   const [expanded, setExpanded] = React.useState(false);
-  const { body, fullName, postedAt, tagline, color } = props;
+  const { body, fullName, postedAt, tagline, color, post_id } = props;
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ maxWidth: { sm: "80vw", md: "50vw" }, m: 1.5, mt: 0 }}>
+    <Card
+    key={post_id}
+      sx={{ maxWidth: { sm: "80vw", md: "50vw" }, m: 1.5, mt: 0 }}
+    >
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: color }}>{fullName[0]}</Avatar>}
         action={
