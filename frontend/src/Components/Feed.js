@@ -1,20 +1,14 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import Toolbar from "@mui/material/Toolbar";
 import MyAppBar from "../Components/Navbar/MyAppBar";
 import ProjectCard from "../Components/ProjectCard";
 import Posts from "../Constants/Posts";
-const drawerWidth = 240;
+import drawer from "./Navbar/LeftDrawer";
+import RightDrawer from "./Navbar/RightDrawer";
+const drawerWidth = "22vw";
 function Feed(props) {
   const colors = [
     "#ff8906",
@@ -41,69 +35,34 @@ function Feed(props) {
     );
   });
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {["Inbox", "Groups", "Active Projects", "Freinds"].map(
-          (text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
-      </List>
-      <Divider />
-      <List>
-        {["Browse", "Your Posts", "Contact Dev"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <MyAppBar />
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
+    <>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <MyAppBar />
+        <Box
+          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          aria-label="mailbox folders"
         >
-          {drawer}
-        </Drawer>
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Box>
       </Box>
       <Box
-        component="main"
         sx={{
           display: "flex",
           flexDirection: "column",
-          flexGrow: 3,
           alignContent: "center",
           alignItems: "center",
           justifyContent: "center",
@@ -113,7 +72,8 @@ function Feed(props) {
         <Toolbar />
         {formattedPosts}
       </Box>
-    </Box>
+      <RightDrawer />
+    </>
   );
 }
 

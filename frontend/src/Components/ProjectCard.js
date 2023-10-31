@@ -9,17 +9,21 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ForumIcon from "@mui/icons-material/Forum";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-const ExpandMore = styled((props) => {
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+
+const Comment = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
+  transform: !expand ? "rotate(0deg)" : "rotate(360deg)",
   transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
+    duration: theme.transitions.duration.short,
   }),
 }));
 
@@ -31,7 +35,7 @@ const ProjectCard = (props) => {
   };
 
   return (
-    <Card sx={{ maxWidth: { sm: "80vw", md: "40vw" }, m: 1.5, mt: 0 }}>
+    <Card sx={{ maxWidth: { sm: "80vw", md: "50vw" }, m: 1.5, mt: 0 }}>
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: color }}>{fullName[0]}</Avatar>}
         action={
@@ -49,40 +53,83 @@ const ProjectCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="like">
+        <IconButton>
           <FavoriteIcon sx={{ color: "red" }} />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <ExpandMore
+        <Comment
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
-          aria-label="show more"
         >
-          <ExpandMoreIcon />
-        </ExpandMore>
+          <ForumIcon />
+        </Comment>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-          <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet
-            over medium-high heat.
-          </Typography>
-          <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers
-          </Typography>
-          <Typography>
-            Set aside off of the heat to let rest for 10 minutes, and then
-            serve.
-          </Typography>
+          <List>
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar alt="Comment 1" src="/static/images/avatar/1.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Comment 1"
+                secondary={
+                  <>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Intereseted
+                    </Typography>
+                  </>
+                }
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar alt="Comment 2" src="/static/images/avatar/2.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Comment 2"
+                secondary={
+                  <>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Interested
+                    </Typography>
+                  </>
+                }
+              />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+            <ListItem>
+              <ListItemAvatar>
+                <Avatar alt="Comment 3" src="/static/images/avatar/3.jpg" />
+              </ListItemAvatar>
+              <ListItemText
+                primary="Comment 3"
+                secondary={
+                  <>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      Intereseted
+                    </Typography>
+                  </>
+                }
+              />
+            </ListItem>
+          </List>
         </CardContent>
       </Collapse>
     </Card>
